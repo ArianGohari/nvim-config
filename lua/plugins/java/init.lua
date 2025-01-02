@@ -17,6 +17,7 @@ return {
             })
           end,
         },
+        inlay_hints = { enabled = false },
       },
     },
   },
