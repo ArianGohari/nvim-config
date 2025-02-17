@@ -17,8 +17,10 @@ vim.cmd([[
   hi BufferLineTabSeparator guibg=NONE ctermbg=NONE
   hi BufferLineTabSeparatorSelected guibg=NONE ctermbg=NONE
   hi BufferLineOffsetSeparator guibg=NONE ctermbg=NONE
+  hi StatusLine ctermbg=NONE cterm=NONE
   highlight Normal guibg=none
   highlight NonText guibg=none
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
+  highlight LspInlayHint ctermbg=NONE guibg=NONE
 ]])
