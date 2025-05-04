@@ -5,6 +5,9 @@
 -- -- LSP Server to use for Python.
 vim.g.lazyvim_python_lsp = "ruff"
 
+-- Set Python 3 provider to the pyenv virtualenv
+vim.g.python3_host_prog = "/Users/arian/.pyenv/versions/nvim-virtualenv/bin/python3"
+
 -- -- conform format
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.templ",
