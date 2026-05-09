@@ -1,6 +1,6 @@
 # nvim config
 
-Plain lazy.nvim + mini.nvim setup. Migrated from LazyVim because the distro got in the way more than it helped.
+Plain lazy.nvim + mini.nvim setup.
 
 No file tree, no tab bar, no dashboard. LSPs are system-installed (brew/npm/pip), same as Helix. Mason is only used for DAP adapters.
 
