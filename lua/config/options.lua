@@ -17,3 +17,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.opt.synmaxcol = 0
+
+-- Disable markdown rendering/concealing
+vim.opt.conceallevel = 0

@@ -1,6 +1,6 @@
 -- since this is just an example spec, don't actually load anything here and return an empty spec
 -- stylua: ignore
-if true then return {} end
+-- if true then return {} end
 
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
@@ -9,17 +9,6 @@ if true then return {} end
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "gruvbox",
-    },
-  },
-
   -- change trouble config
   {
     "folke/trouble.nvim",
@@ -66,37 +55,18 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    event = "LazyFile",
-    dependencies = {
-      "mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", config = function() end },
-    },
-    opts = function()
-      local lspconfig = require("lspconfig")
-
-      -- Handle denols and vtsls conflict
-      if LazyVim.lsp.is_enabled("denols") and LazyVim.lsp.is_enabled("vtsls") then
-        local is_deno = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
-        LazyVim.lsp.disable("vtsls", is_deno)
-        LazyVim.lsp.disable("denols", function(root_dir, config)
-          if not is_deno(root_dir) then
-            config.settings.deno.enable = false
-          end
-          return false
-        end)
-      end
-
-      -- LSP server configurations
-      return {
-        inlay_hints = { enabled = false },
-        servers = {
-          -- Python
-          ruff = {},
-          -- Dart
-          dartls = {},
+    opts = {
+      inlay_hints = { enabled = false },
+      servers = {
+        ruff = {},
+        dartls = {},
+        taplo = false,
+        groovyls = {
+          cmd = { "groovy-language-server" },
         },
-      }
-    end,
+        tinymist = {},
+      },
+    },
   },
 
   -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
@@ -112,12 +82,9 @@ return {
         "html",
         "java",
         "dart",
-        "flutter",
         "javascript",
         "json",
-        "lua",
-        "markdown",
-        "markdown_inline",
+        "nextflow",
         "python",
         "query",
         "regex",
@@ -125,52 +92,20 @@ return {
         "typescript",
         "vim",
         "yaml",
-        "sql",
-        "deno",
       },
     },
   },
 
-  -- the opts function can also be used to change the default opts:
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, {
-        function()
-          return "😄"
-        end,
-      })
-    end,
-  },
-
-  -- or you can return new options to override all the defaults
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function()
-      return {
-        --[[add your custom lualine config here]]
-      }
-    end,
-  },
-
-  -- use mini.starter instead of alpha
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
-
-  -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
-  { import = "lazyvim.plugins.extras.lang.json" },
 
   -- add any tools you want to have installed below
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "stylua",
         "shellcheck",
         "shfmt",
         "flake8",
-        "sqlfluff",
       },
     },
   },
